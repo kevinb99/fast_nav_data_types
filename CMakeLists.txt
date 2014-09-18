@@ -6,8 +6,8 @@ project(fast_nav_data_type)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   message_generation
-  rocpp
-  sensors
+  message_runtime
+  roscpp
 )
 
 ## System dependencies are found with CMake's conventions
@@ -80,10 +80,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES fast_nav_data_type
-#  CATKIN_DEPENDS message_generation rocpp sensors
-#  DEPENDS system_lib
+  INCLUDE_DIRS include
+  LIBRARIES
+  CATKIN_DEPENDS message_generation roscpp message_runtime
+  #DEPENDS system_lib
 )
 
 ###########
@@ -94,13 +94,21 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+	include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library
-# add_library(fast_nav_data_type
-#   src/${PROJECT_NAME}/fast_nav_data_type.cpp
-# )
+add_library(Point2DContinious src/Point2DContinious.cpp )
+target_link_libraries(Point2DContinious ${catkin_LIBRARIES} )
+
+## Declare a cpp library
+add_library(Point2DDiscrete src/Point2DDiscrete.cpp )
+target_link_libraries(Point2DDiscrete ${catkin_LIBRARIES} )
+
+## Declare a cpp library
+add_library(Point2DRadial src/Point2DRadial.cpp )
+target_link_libraries(Point2DRadial ${catkin_LIBRARIES} )
 
 ## Declare a cpp executable
 # add_executable(fast_nav_data_type_node src/fast_nav_data_type_node.cpp)
@@ -109,10 +117,7 @@ include_directories(
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(fast_nav_data_type_node fast_nav_data_type_generate_messages_cpp)
 
-## Specify libraries to link a library or executable target against
-# target_link_libraries(fast_nav_data_type_node
-#   ${catkin_LIBRARIES}
-# )
+
 
 #############
 ## Install ##
