@@ -1,3 +1,7 @@
+#ifndef MATHS
+
+#define MATHS
+
 #include <math.h>
 
 namespace fast_nav
@@ -11,3 +15,5 @@ namespace fast_nav
 }
 
 using namespace fast_nav;
+
+#endif

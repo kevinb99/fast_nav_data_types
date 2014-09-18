@@ -6,6 +6,10 @@ Point2DContinious::Point2DContinious(double _x, double _y)
 	y = _y;
 };
 
+Point2DContinious::Point2DContinious(){};
+
+Point2DContinious::~Point2DContinious(){};
+
 double Point2DContinious::getX()
 {
 	return x;

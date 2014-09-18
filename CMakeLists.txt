@@ -107,11 +107,16 @@ add_library(Point2DDiscrete src/Point2DDiscrete.cpp )
 target_link_libraries(Point2DDiscrete ${catkin_LIBRARIES} )
 
 ## Declare a cpp library
-add_library(Point2DRadial src/Point2DRadial.cpp )
-target_link_libraries(Point2DRadial ${catkin_LIBRARIES} )
+add_library(Point2DPolar src/Point2DPolar.cpp )
+target_link_libraries(Point2DPolar ${catkin_LIBRARIES} )
+
+## Declare a cpp library
+add_library(Point2D src/Point2D.cpp )
+target_link_libraries(Point2D Point2DDiscrete Point2DContinious Point2DPolar ${catkin_LIBRARIES} )
 
 ## Declare a cpp executable
-# add_executable(fast_nav_data_type_node src/fast_nav_data_type_node.cpp)
+add_executable(Point_Test src/Point_Test.cpp)
+target_link_libraries(Point_Test Point2D Point2DDiscrete Point2DContinious Point2DPolar ${catkin_LIBRARIES} )
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
