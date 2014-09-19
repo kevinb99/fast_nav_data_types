@@ -26,6 +26,11 @@ public:
 	Point2DContinious* getContinious();
 	Point2DDiscrete* getDiscrete();
 
+	double getX();
+	double getY();
+	int getDX();
+	int getDY();
+
 protected:
 	void init(Point2DPolar* _polar, double resolution);
 	void init(Point2DDiscrete* _discrete);

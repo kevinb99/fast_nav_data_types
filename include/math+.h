@@ -3,6 +3,7 @@
 #define MATHS
 
 #include <math.h>
+#include <cstddef>
 
 namespace fast_nav
 {
@@ -11,6 +12,15 @@ namespace fast_nav
 	double round(double a)
 	{
 		return floor(a+0.5);
+	}
+
+	double bound2PI(double value)
+	{
+		while(value > 2*PI)
+			value -= 2*PI;
+		while(value < 0)
+			value += 2*PI;
+		return value;		
 	}
 }
 

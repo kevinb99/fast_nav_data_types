@@ -43,6 +43,8 @@ Point2D::Point2D(double a, double b, double resolution,  pointTypes is)
 	}
 }
 
+Point2D::~Point2D(){};
+
 void Point2D::init(Point2DPolar* _polar, double resolution)
 {
 	continious = new Point2DContinious(cos(_polar->getTheta())*_polar->getRadius(),sin(_polar->getTheta())*_polar->getRadius());
@@ -90,4 +92,30 @@ Point2DContinious* Point2D::getContinious()
 Point2DDiscrete* Point2D::getDiscrete()
 {
 	return discrete;
+}
+
+double Point2D::getX()
+{
+	return Point2DContinious::getX();
+}
+
+double Point2D::getY()
+{
+	return Point2DContinious::getX();
+}
+
+int Point2D::getDX()
+{
+	return Point2DDiscrete::getX();
+}
+
+int Point2D::getDY()
+{
+	return Point2DDiscrete::getY();
+}
+
+using namespace fast_nav;
+double round(double val)
+{
+	return fast_nav::round(val);
 }

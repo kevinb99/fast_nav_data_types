@@ -1,5 +1,7 @@
 #include "Point2DDiscrete.h"
 
+using namespace fast_nav;
+
 Point2DDiscrete::Point2DDiscrete(int _x, int _y, double _resolution)
 {
 	x = _x;
@@ -9,8 +11,8 @@ Point2DDiscrete::Point2DDiscrete(int _x, int _y, double _resolution)
 
 Point2DDiscrete::Point2DDiscrete(double _x, double _y, double _resolution)
 {
-	x = _x/_resolution;
-	y = _y/_resolution;
+	x = fast_nav::round(_x/_resolution);
+	y = fast_nav::round(_y/_resolution);
 	resolution = _resolution;
 }
 

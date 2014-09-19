@@ -114,9 +114,25 @@ target_link_libraries(Point2DPolar ${catkin_LIBRARIES} )
 add_library(Point2D src/Point2D.cpp )
 target_link_libraries(Point2D Point2DDiscrete Point2DContinious Point2DPolar ${catkin_LIBRARIES} )
 
+## Declare a cpp library
+add_library(Pose2D src/Pose2D.cpp )
+target_link_libraries(Pose2D Point2D ${catkin_LIBRARIES} )
+
+## Declare a cpp library
+add_library(Pose3DDiscrete src/Pose3DDiscrete.cpp )
+target_link_libraries(Pose3DDiscrete Pose2D ${catkin_LIBRARIES} )
+
+## Declare a cpp library
+add_library(Pose3D src/Pose3D.cpp )
+target_link_libraries(Pose3D Pose3DDiscrete ${catkin_LIBRARIES} )
+
+## Declare a cpp library
+add_library(ControledVariable src/ControledVariable.cpp )
+target_link_libraries(ControledVariable ${catkin_LIBRARIES} )
+
 ## Declare a cpp executable
 add_executable(Point_Test src/Point_Test.cpp)
-target_link_libraries(Point_Test Point2D Point2DDiscrete Point2DContinious Point2DPolar ${catkin_LIBRARIES} )
+target_link_libraries(Point_Test Pose3D ${catkin_LIBRARIES})#Pose2D Point2D Point2DDiscrete Point2DContinious Point2DPolar ${catkin_LIBRARIES} )
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
