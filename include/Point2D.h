@@ -19,19 +19,23 @@ public:
 	Point2D(Point2DDiscrete* _discrete);
 	Point2D(Point2DContinious* _continious, double resolution);
 	Point2D(int _x, int _y, double _resolution);
-	Point2D(double a, double b, double resolution,  pointTypes is);
+	Point2D(double _x, double _y, double resolution);
 	~Point2D();
 
+/*
 	Point2DPolar* getPolar();
 	Point2DContinious* getContinious();
 	Point2DDiscrete* getDiscrete();
-
+*/
+/*
 	double getX();
 	double getY();
 	int getDX();
 	int getDY();
+*/
 
 protected:
+	/*
 	void init(Point2DPolar* _polar, double resolution);
 	void init(Point2DDiscrete* _discrete);
 	void init(Point2DContinious* _continious, double resolution);
@@ -40,6 +44,7 @@ protected:
 	Point2DPolar* polar;
 	Point2DDiscrete* discrete;
 	Point2DContinious* continious;
+	*/
 };
 
 

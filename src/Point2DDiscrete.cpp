@@ -20,12 +20,12 @@ Point2DDiscrete::Point2DDiscrete(){};
 
 Point2DDiscrete::~Point2DDiscrete(){};
 
-int Point2DDiscrete::getX()
+int Point2DDiscrete::getDX()
 {
 	return x;
 }
 
-int Point2DDiscrete::getY()
+int Point2DDiscrete::getDY()
 {
 	return y;
 }

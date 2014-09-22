@@ -95,6 +95,7 @@ catkin_package(
 # include_directories(include)
 include_directories(
 	include
+	src
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -138,9 +139,13 @@ target_link_libraries(VariableAt Point2D ${catkin_LIBRARIES} )
 add_library(Grid2D src/Grid2D.cpp )
 target_link_libraries(Grid2D VariableAt ${catkin_LIBRARIES} )
 
+## Declare a cpp library
+add_library(BoolGrid2D src/BoolGrid2D.cpp )
+target_link_libraries(BoolGrid2D Grid2D ${catkin_LIBRARIES} )
+
 ## Declare a cpp executable
 add_executable(Point_Test src/Point_Test.cpp)
-target_link_libraries(Point_Test Pose3D ${catkin_LIBRARIES})#Pose2D Point2D Point2DDiscrete Point2DContinious Point2DPolar ${catkin_LIBRARIES} )
+target_link_libraries(Point_Test BoolGrid2D Pose3D ${catkin_LIBRARIES})#Pose2D Point2D Point2DDiscrete Point2DContinious Point2DPolar ${catkin_LIBRARIES} )
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes

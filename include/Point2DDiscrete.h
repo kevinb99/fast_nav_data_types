@@ -13,8 +13,8 @@ public:
 	Point2DDiscrete(double _x, double _y, double _resolution);
 	~Point2DDiscrete();
 
-	int getX();
-	int getY();
+	int getDX();
+	int getDY();
 	double getResolution();
 
 protected:
