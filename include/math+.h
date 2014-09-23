@@ -4,6 +4,8 @@
 
 #include <math.h>
 #include <cstddef>
+#include <iostream>
+#include "ros/ros.h"
 
 namespace fast_nav
 {

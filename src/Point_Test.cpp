@@ -1,8 +1,10 @@
 #include "Pose3D.h"
 #include "ros/ros.h"
 #include "Grid2D.h"
-#include "Grid2D.cpp"
+//#include "Grid2D.cpp"
 #include "BoolGrid2D.h"
+#include "VariableAt.cpp"
+#include "BoolGrid2D.cpp"
 #include <iostream>
 
 int main(int argc, char **argv)
@@ -39,6 +41,27 @@ int main(int argc, char **argv)
 	Grid2D<int>* grid = new Grid2D<int>(10, 10, 4);
 
 	BoolGrid2D* boolGrid = new BoolGrid2D(5, 20);
+
+	Point2D* atVar = new Point2D(3,10);
+
+	bool testBool = boolGrid->getAt(atVar);
+
+	bool addDoes = true + false;
+
+	std::cout << "At (3,10) in bool grid there is " << std::boolalpha << boolGrid->getAt(atVar) << "\n";
+
+	std::cout << "But what about addDoes? " << std::boolalpha << addDoes << "\n";
+
+	VariableAt<bool>* addThis = new VariableAt<bool>(atVar, addDoes);
+
+	boolGrid->addAt(addThis);
+
+	std::cout << "Did that fix it? ";
+	
+	if(boolGrid->getAt(atVar))
+		std::cout << "Yes\n";
+	else
+		std::cout << "No\n";
 
 	std::cout << "I lived \n";
 

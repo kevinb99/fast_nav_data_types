@@ -2,18 +2,16 @@
 
 
 template<class T>
-VariableAt<T>::VariableAt(Point2D* _at, T _variable)
+VariableAt<T>::VariableAt(Point2D* _at, T _variable) : Point2D(_at)
 {
-	at = _at;
 	variable = _variable;
 };
 
+template<class T>
+VariableAt<T>::VariableAt(Point2D* _at) : Point2D(_at){};
 
 template<class T>
-Point2D* VariableAt<T>::getHere()
-{
-	return at;
-}
+VariableAt<T>::~VariableAt(){};
 
 template<class T>
 T VariableAt<T>::getAt()

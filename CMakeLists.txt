@@ -10,6 +10,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
 )
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -138,6 +140,10 @@ target_link_libraries(VariableAt Point2D ${catkin_LIBRARIES} )
 ## Declare a cpp library
 add_library(Grid2D src/Grid2D.cpp )
 target_link_libraries(Grid2D VariableAt ${catkin_LIBRARIES} )
+
+## Declare a cpp library
+add_library(CenteredGrid2D src/CenteredGrid2D.cpp )
+target_link_libraries(CenteredGrid2D Grid2D ${catkin_LIBRARIES} )
 
 ## Declare a cpp library
 add_library(BoolGrid2D src/BoolGrid2D.cpp )

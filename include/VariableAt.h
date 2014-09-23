@@ -4,18 +4,17 @@
 #include "Point2D.h"
 
 template<class T>
-class VariableAt
+class VariableAt : public Point2D
 {
 public:
 	VariableAt(Point2D* _at, T _variable);
+	VariableAt(Point2D* _at);
 	~VariableAt();
 
-	Point2D* getHere();
 	T getAt();
 	
 protected:
 	T variable;
-	Point2D* at;
 };
 
 #endif
