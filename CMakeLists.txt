@@ -118,6 +118,11 @@ add_library(Point2D src/Point2D.cpp )
 target_link_libraries(Point2D Point2DDiscrete Point2DContinious Point2DPolar ${catkin_LIBRARIES} )
 
 ## Declare a cpp library
+add_library(Range src/Range.cpp )
+target_link_libraries(Range ${catkin_LIBRARIES} )
+
+
+## Declare a cpp library
 add_library(Pose2D src/Pose2D.cpp )
 target_link_libraries(Pose2D Point2D ${catkin_LIBRARIES} )
 

@@ -1,14 +1,10 @@
 #include "Grid2D.h"
 
 template<class T>
-Grid2D<T>::Grid2D(int x, int y)
-{
-	grid = std::vector<std::vector<T> >(x, std::vector<T>(y));
-};
-
-template<class T>
 Grid2D<T>::Grid2D(int x, int y, T value)
 {
+	x++;
+	y++;
 	grid = std::vector<std::vector<T> >(x, std::vector<T>(y));
 	#pragma omp parallel for
 	for(int cy=0; cy<y; cy++)
@@ -27,6 +23,21 @@ Grid2D<T>::Grid2D(std::vector<std::vector<T> > _grid)
 };
 
 template<class T>
+Grid2D<T>::Grid2D(int size, T value)
+{
+	size++;
+	grid = std::vector<std::vector<T> >(size, std::vector<T>(size));
+	#pragma omp parallel for
+	for(int cy=0; cy<grid[0].size(); cy++)
+	{
+		for(int cx=0; cx<grid.size(); cx++)
+		{
+			grid[cx][cy] = value;
+		}
+	}
+};
+
+template<class T>
 Grid2D<T>::~Grid2D()
 {
 };
@@ -34,7 +45,7 @@ Grid2D<T>::~Grid2D()
 template<class T>
 T Grid2D<T>::getAt(Point2D* at)
 {
-	//ROS_DEBUG("geting from base grid");
+	//ROS_INFO("geting from base grid at %d %d, from grid %d %d", at->getDX(), at->getDY(), (int)grid.size(), (int)grid[0].size());
 	return grid[at->getDX()][at->getDY()];
 }
 
@@ -58,6 +69,12 @@ void Grid2D<T>::setAt(VariableAt<T>* variable)
 }
 
 template<class T>
+void Grid2D<T>::setAt(Point2D* at, T value)
+{
+	setAt(new VariableAt<T>(at,value));
+}
+
+template<class T>
 void Grid2D<T>::setAt(std::vector<VariableAt<T>* > variables)
 {
 	#pragma omp parallel for
@@ -73,6 +90,13 @@ void Grid2D<T>::addAt(VariableAt<T>* variable)
 	VariableAt<T>* var = new VariableAt<T>(variable, variable->getAt()+getAt(variable));
 	setAt(var);
 }
+
+template<class T>
+void Grid2D<T>::addAt(Point2D* at, T value)
+{
+	addAt(new VariableAt<T>(at, value));
+}
+
 
 template<class T>
 void Grid2D<T>::addAt(std::vector<VariableAt<T>* > variables)

@@ -1,3 +1,5 @@
+#ifndef VARIABLEATCPP
+#define VARIABLEATCPP
 #include "VariableAt.h"
 
 
@@ -18,3 +20,5 @@ T VariableAt<T>::getAt()
 {
 	return variable;
 }
+
+#endif

@@ -19,7 +19,7 @@ public:
 	Point2D(Point2DDiscrete* _discrete);
 	Point2D(Point2DContinious* _continious, double resolution);
 	Point2D(int _x, int _y, double _resolution);
-	Point2D(double _x, double _y, double resolution=1.0);
+	Point2D(double _x, double _y, double resolution);
 	~Point2D();
 
 /*

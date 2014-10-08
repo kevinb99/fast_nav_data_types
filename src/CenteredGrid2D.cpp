@@ -2,28 +2,21 @@
 #include "Grid2D.cpp"
 
 template<class T>
-CenteredGrid2D<T>::CenteredGrid2D(int x, int y) : Grid2D<T>(x,y)
+CenteredGrid2D<T>::CenteredGrid2D(int x, int y, T value) : Grid2D<T>(x+1,y+1,value)
 {
-	xOffset = fast_nav::round(x/2);
-	yOffset = fast_nav::round(y/2);
+	xOffset = (x+1)/2;
+	yOffset = (y+1)/2;
 };
 
 template<class T>
-CenteredGrid2D<T>::CenteredGrid2D(int x, int y, T value) : Grid2D<T>(x,y,value)
-{
-	xOffset = fast_nav::round(x/2);
-	yOffset = fast_nav::round(y/2);
-};
-
-template<class T>
-CenteredGrid2D<T>::CenteredGrid2D(int x, int y, int _xOffset, int _yOffset) : Grid2D<T>(x,y)
+CenteredGrid2D<T>::CenteredGrid2D(int x, int y, int _xOffset, int _yOffset) : Grid2D<T>(x+1,y+1)
 {
 	xOffset = _xOffset;
 	yOffset = _yOffset;
 };
 
 template<class T>
-CenteredGrid2D<T>::CenteredGrid2D(int x, int y, int _xOffset, int _yOffset, T value) : Grid2D<T>(x,y,value)
+CenteredGrid2D<T>::CenteredGrid2D(int x, int y, int _xOffset, int _yOffset, T value) : Grid2D<T>(x+1,y+1,value)
 {
 	xOffset = _xOffset;
 	yOffset = _yOffset;
@@ -32,14 +25,25 @@ CenteredGrid2D<T>::CenteredGrid2D(int x, int y, int _xOffset, int _yOffset, T va
 template<class T>
 CenteredGrid2D<T>::CenteredGrid2D(std::vector<std::vector<T> > _grid) : Grid2D<T>(_grid)
 {	
-	xOffset = fast_nav::round(Grid2D<T>::getWidth()/2);
-	yOffset = fast_nav::round(Grid2D<T>::getHeight()/2);
+	xOffset = Grid2D<T>::getWidth()/2;
+	yOffset = Grid2D<T>::getHeight()/2;
 };
+
+template<class T>
+CenteredGrid2D<T>::CenteredGrid2D(int size, T value) : Grid2D<T>(size+1, value)
+{
+	xOffset = Grid2D<T>::getWidth()/2;
+	yOffset = Grid2D<T>::getHeight()/2;
+};
+
+template<class T>
+CenteredGrid2D<T>::~CenteredGrid2D(){};
 
 template<class T>
 VariableAt<T>* CenteredGrid2D<T>::applyOffsets(VariableAt<T>* variable)
 {
-	return new VariableAt<T>(new Point2D(variable->getDX()-xOffset, variable->getDY()-yOffset, 
+	//ROS_INFO("applying offset %d %d", xOffset, yOffset);
+	return new VariableAt<T>(new Point2D(xOffset-variable->getDX(), yOffset-variable->getDY(), 
 		variable->getResolution()), variable->getAt());
 }
 
@@ -74,6 +78,12 @@ std::vector<VariableAt<T>*> CenteredGrid2D<T>::getAt(std::vector<Point2D*> ats)
 }
 
 template<class T>
+void CenteredGrid2D<T>::setAt(Point2D* at, T value)
+{
+	setAt(new VariableAt<T>(at, value));
+}
+
+template<class T>
 void CenteredGrid2D<T>::setAt(VariableAt<T>* variable)
 {
 	Grid2D<T>::setAt(applyOffsets(variable));
@@ -93,7 +103,19 @@ void CenteredGrid2D<T>::addAt(VariableAt<T>* variable)
 }
 
 template<class T>
+void CenteredGrid2D<T>::addAt(Point2D* at, T value)
+{
+	addAt(new VariableAt<T>(at, value));
+}
+
+template<class T>
 void CenteredGrid2D<T>::addAt(std::vector<VariableAt<T>* > variables)
 {
 	Grid2D<T>::addAt(applyOffsets(variables));
+}
+
+template<class T>
+bool CenteredGrid2D<T>::isInGrid(Point2D* at)
+{
+	Grid2D<T>::isInGrid(applyOffsets(new VariableAt<T>(at)));
 }

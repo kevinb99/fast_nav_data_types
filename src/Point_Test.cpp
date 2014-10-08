@@ -40,10 +40,10 @@ int main(int argc, char **argv)
 
 	Grid2D<int>* grid = new Grid2D<int>(10, 10, 4);
 
-	BoolGrid2D* boolGrid = new BoolGrid2D(5, 20);
+	BoolGrid2D* boolGrid = new BoolGrid2D(5, 5);
 
-	Point2D* atVar = new Point2D(3,10);
-
+	Point2D* atVar = new Point2D(-3,-3,1);
+	//ROS_INFO("sending at var");
 	bool testBool = boolGrid->getAt(atVar);
 
 	bool addDoes = true + false;
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 	boolGrid->addAt(addThis);
 
 	std::cout << "Did that fix it? ";
-	
+
 	if(boolGrid->getAt(atVar))
 		std::cout << "Yes\n";
 	else
